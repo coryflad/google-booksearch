@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-import Search from './Search/Search'
+import Header from './Header'
+import Books from './Books'
 
 class App extends React.Component {
   render() {
     return (
       <div className='title'>
-        <h1>Google Book Search</h1>
-        <Search />
+        <Header />
+        <Books />
       </div>
 
     )
