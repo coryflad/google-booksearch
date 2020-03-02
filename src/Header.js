@@ -1,10 +1,9 @@
 import React from 'react'
 
 function Header() {
-    return (
+    return(
         <header>
-            <i className='fas fa-book fa-2x'></i>
-            <h1>Book Cards</h1>
+            <h1>Google Book Search</h1>
         </header>
     )
 }
