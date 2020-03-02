@@ -20,3 +20,7 @@ form {
   background: lightgray;
   text-align: center;
 }
+
+.bookImage {
+  width: 100px;
+}

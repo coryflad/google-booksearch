@@ -24,6 +24,41 @@ class App extends Component {
         return queryItems.join('&');
     }
 
+    checkInteger(inputInteger) {
+        let outputValue = inputInteger;
+        if (inputInteger === "") {
+            outputValue = 0;
+        }
+        if (inputInteger === undefined) {
+            outputValue = 0;
+        }
+        if (inputInteger == null) {
+            outputValue = 0;
+        }
+        return outputValue;
+    }
+    
+    checkString(inputString) {
+        let outputText = inputString;
+        if (inputString === undefined) {
+            outputText = "no details";
+        }
+        if (inputString == null) {
+            outputText = "no details";
+        }
+        return outputText;
+    }
+    
+   checkURL(inputURL) {
+        let outputURL = inputURL;
+        if (inputURL === undefined) {
+            outputURL = "/";
+        }
+        if (inputURL == null) {
+            outputURL = "/";
+        }
+        return outputURL;
+    }
 
     handleSearch = (e) => {
         e.preventDefault()
@@ -58,18 +93,26 @@ class App extends Component {
             })
             .then(res => res.json())
             .then(data => {
+                // no results validation
                 if (data.totalItems === 0) throw new Error('No books found')
-
+                
+                // need inconsitent results validation
                 const aBooks = data.items.map(book => {
                     const { title, authors, description, imageLinks } = book.volumeInfo
                     const { saleability, retailPrice } = book.saleInfo
+                    let imageLinksOutput = ''
+                    if(imageLinks === undefined){
+                        imageLinksOutput = 'https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png'
+                    } else {
+                        imageLinksOutput = imageLinks.thumbnail
+                    }
                     return {
-                        title: title,
-                        author: authors,
-                        description: description,
-                        thumbnail_URL: imageLinks.thumbnail,
-                        saleability: saleability,
-                        price: retailPrice,
+                        title: this.checkInteger(title),
+                        author: this.checkInteger(authors),
+                        description: this.checkInteger(description),
+                        thumbnail_URL: this.checkURL(imageLinksOutput),
+                        saleability: this.checkInteger(saleability),
+                        price: this.checkInteger(retailPrice),
                     };
                 })
                 this.setState({

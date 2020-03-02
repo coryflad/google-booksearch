@@ -24,7 +24,7 @@ class Book extends Component {
                 <div>
                     <h2>{this.props.title}</h2>
 
-                    <img src={this.props.thumbnail_URL} alt='book should be here?' />
+                    <img className='bookImage' src={this.props.thumbnail_URL} alt='book should be here?' />
                     <div>
                         <h3>Authors: {authors}</h3>
                         <h4>Price: Free</h4>
@@ -44,7 +44,7 @@ class Book extends Component {
                 <div>
                     <h2>{this.props.title}</h2>
 
-                    <img src={this.props.thumbnail_URL} alt='book should be here?' />
+                    <img className='bookImage' src={this.props.thumbnail_URL} alt='book should be here?' />
 
                     <div>
                         <h3>Authors: {authors}</h3>
