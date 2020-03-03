@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
-import Search from './Search';
-import Book from './Book';
-
+import React, { Component } from 'react'
+import './App.css'
+import Search from './Search'
+import Book from './Book'
 
 class App extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             books: [],
             error: null,
@@ -20,44 +19,44 @@ class App extends Component {
 
     formatQueryParams(params) {
         const queryItems = Object.keys(params)
-            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
-        return queryItems.join('&');
+            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+        return queryItems.join('&')
     }
 
     checkInteger(inputInteger) {
-        let outputValue = inputInteger;
+        let outputValue = inputInteger
         if (inputInteger === "") {
-            outputValue = 0;
+            outputValue = 0
         }
         if (inputInteger === undefined) {
-            outputValue = 0;
+            outputValue = 0
         }
         if (inputInteger == null) {
-            outputValue = 0;
+            outputValue = 0
         }
-        return outputValue;
+        return outputValue
     }
 
     checkString(inputString) {
-        let outputText = inputString;
+        let outputText = inputString
         if (inputString === undefined) {
-            outputText = "no details";
+            outputText = "no details"
         }
         if (inputString == null) {
-            outputText = "no details";
+            outputText = "no details"
         }
-        return outputText;
+        return outputText
     }
 
     checkURL(inputURL) {
-        let outputURL = inputURL;
+        let outputURL = inputURL
         if (inputURL === undefined) {
-            outputURL = "/";
+            outputURL = "/"
         }
         if (inputURL == null) {
-            outputURL = "/";
+            outputURL = "/"
         }
-        return outputURL;
+        return outputURL
     }
 
     handleSearch = (e) => {
@@ -70,26 +69,26 @@ class App extends Component {
             params: data
         })
 
-        const searchURL = 'https://www.googleapis.com/books/v1/volumes';
-        const queryString = this.formatQueryParams(data);
-        const url = searchURL + '?' + queryString;
+        const searchURL = 'https://www.googleapis.com/books/v1/volumes'
+        const queryString = this.formatQueryParams(data)
+        const url = searchURL + '?' + queryString
 
-        console.log(url);
+        console.log(url)
 
         const options = {
             method: 'GET',
             header: {
-                "Authorization": "Bearer AIzaSyCWZJX4XS2w0qsgnl18-Bpj2YPz4ocjFq8",
+                "Authorization": "",
                 "Content-Type": "application/json"
             }
-        };
+        }
 
         fetch(url, options)
             .then(res => {
                 if (!res.ok) {
-                    throw new Error('Something went wrong, please try again later.');
+                    throw new Error('Something went wrong, please try again later.')
                 }
-                return res;
+                return res
             })
             .then(res => res.json())
             .then(data => {
@@ -107,36 +106,34 @@ class App extends Component {
                         imageLinksOutput = imageLinks.thumbnail
                     }
                     return {
-                        title: this.checkInteger(title),
-                        author: this.checkInteger(authors),
+                        title: this.checkString(title),
+                        author: this.checkString(authors),
                         description: this.checkString(description),
                         thumbnail_URL: this.checkURL(imageLinksOutput),
                         saleability: this.checkInteger(saleability),
                         price: this.checkInteger(retailPrice),
-                    };
+                    }
                 })
                 this.setState({
                     books: aBooks,
                     error: null
-                });
+                })
             })
             .catch(err => {
                 this.setState({
                     error: err.message
-                });
-            });
+                })
+            })
 
     }
-
-
 
     render() {
         const errorMessage = this.state.error ? <div>{this.state.error}</div> : false
 
-        let lib = this.state.books
-        // console.log(lib);
+        const library = this.state.books
+        
 
-        const books = lib.map((book, i) => {
+        const books = library.map((book, i) => {
             return <Book
                 key={i}
                 title={book.title}
@@ -146,7 +143,7 @@ class App extends Component {
                 saleability={book.saleability}
                 price={book.price}
             />
-        });
+        })
 
 
         return (
@@ -158,8 +155,8 @@ class App extends Component {
                 {errorMessage}
                 {books}
             </div>
-        );
+        )
     }
 }
 
-export default App;
+export default App
