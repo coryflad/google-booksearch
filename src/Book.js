@@ -32,7 +32,10 @@ class Book extends React.Component {
                 <div>
                     <h2>{this.props.title}</h2>
                     <h2>{this.props.publisher}</h2>
-                    <a href={this.props.previewLink}>
+                    <a href={this.props.previewLink}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    >
                         <img className='bookImage'
                             src={this.props.thumbnail_URL}
                             alt='bookimage' />
