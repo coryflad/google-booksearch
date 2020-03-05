@@ -9,9 +9,12 @@ class Book extends React.Component {
             return (
                 <div>
                     <h2>{this.props.title}</h2>
+                    <a href={this.props.previewLink}>
                         <img className='bookImage'
                             src={this.props.thumbnail_URL}
                             alt='bookimage' />
+                    </a>
+
                     <div>
                         <h3>Authors: {authors}</h3>
                         <h4>Price: Free</h4>
@@ -29,9 +32,11 @@ class Book extends React.Component {
                 <div>
                     <h2>{this.props.title}</h2>
                     <h2>{this.props.publisher}</h2>
-                    <img className='bookImage'
-                        src={this.props.thumbnail_URL}
-                        alt='bookimage' />
+                    <a href={this.props.previewLink}>
+                        <img className='bookImage'
+                            src={this.props.thumbnail_URL}
+                            alt='bookimage' />
+                    </a>
                     <div>
                         <h3>Authors: {authors}</h3>
                         {priceTag}

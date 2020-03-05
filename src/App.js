@@ -97,7 +97,7 @@ class App extends Component {
 
                 // need inconsitent results validation
                 const aBooks = data.items.map(book => {
-                    const { title, authors, description, imageLinks } = book.volumeInfo
+                    const { title, authors, description, imageLinks, previewLink } = book.volumeInfo
                     const { saleability, retailPrice } = book.saleInfo
                     let imageLinksOutput = ''
                     if (imageLinks === undefined) {
@@ -109,6 +109,7 @@ class App extends Component {
                         title: this.checkString(title),
                         author: this.checkString(authors),
                         description: this.checkString(description),
+                        previewLink: this.checkURL(previewLink),
                         thumbnail_URL: this.checkURL(imageLinksOutput),
                         saleability: this.checkInteger(saleability),
                         price: this.checkInteger(retailPrice),
@@ -139,6 +140,7 @@ class App extends Component {
                 title={book.title}
                 author={book.author}
                 description={book.description}
+                previewLink={book.previewLink}
                 thumbnail_URL={book.thumbnail_URL}
                 saleability={book.saleability}
                 price={book.price}
